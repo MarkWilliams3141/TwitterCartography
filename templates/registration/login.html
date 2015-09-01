@@ -1,0 +1,46 @@
+{% extends "login_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+
+<video autoplay loop muted poster="{% static 'img/login_still.jpg' %}" id="bgvid">
+     <source src="{% static 'video/birds.mp4' %}" type="video/mp4">
+</video>
+  <style>
+
+  </style>
+
+<script type="text/javascript">
+    var video = document.getElementById('bgvid');
+    video.addEventListener('click',function(){
+    video.play();
+    },false);
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-lock"></span> Login</div>
+                <div class="panel-body">
+                    <form method="post" class="form-horizontal" role="form" action=".">
+                      {% csrf_token %}
+                        <div >
+                            {{form | bootstrap_horizontal:'col-lg-4'}}
+                        </div>
+                      <input class="btn btn-success btn-block" type="submit" value="{% trans 'Log in' %}" />
+                      <input type="hidden" name="next" value="/" />
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Not Registered? <a href="{% url 'registration_register' %}">Register here</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
